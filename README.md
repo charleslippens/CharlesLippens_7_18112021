@@ -1,10 +1,24 @@
-Proposition de développement de la structure et de la mise en page + fiche d’investigation en cours
 
 
 ## Projet 7 : Développez un algorithme de recherche en JavaScript
 
 
 Version de novembre 2021
+
+
+## Etapes:
+
+Proposition de développement de la structure (en cours):
+- CSS
+- Images
+- JS: 
+  - API: fichier de données
+  - Page: Display.js pour l'affichage des recettes
+  - main.js: Appel de l'api construit la section avec toutes les recettes
+- index.html
+
+mise en page + fiche d’investigation en cours
+
 
 ## Consignes:
 
