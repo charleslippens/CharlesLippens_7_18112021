@@ -1,13 +1,21 @@
 "use strict";
+import Builder from "./page/Builder.js";
+import Search from "./search/Search.js";
+import Utils from "./utilities/Utils.js";
 
-import Display from "./page/Display.js";
+// Construit par default sans la recherche
+Builder.init();
 
-class Builder {
-	static launch() {
-		// Construit la section avec toutes les recettes
-		Display.buildResult(recipes);
+// Construit avec la recherche Input
+document.getElementById("searchBarInput").addEventListener("keyup", (key) => {
+	let valueSearch = key.target.value;
+	if (Utils.Valid(valueSearch)) {
+		let result = Search.searchMainInput(valueSearch);
+		Utils.clearRecipes();
+		Builder.initSearch(result);
+		return;
 	}
-}
-
-// Construction par défault sans la recherche
-Builder.launch();
+	// Reset le build
+	Utils.clearRecipes();
+	Builder.init();
+});

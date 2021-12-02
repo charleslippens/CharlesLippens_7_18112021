@@ -8,52 +8,46 @@
 		<link rel="icon" type="image/png" href="./images/logo_plats.png" />
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" />
 		<link rel="stylesheet" href="./css/style.css" />
-		<script src="./js/API/recipesData.js"></script>
-		<script type="module" src="./js/main.js"></script>
 	</head>
-
 	<body>
-		<!-- Header -->
+		<!-- En tete-->
 		<header>
 			<img
 				src="https://res.cloudinary.com/dlpyn3wxf/image/upload/v1619049061/logo-les-petits-plats_jagbwd.png"
 				alt="Les petits plats"
 			/>
-
-			<!-- Bar de recherche-->
+			<!-- Barre de recherche -->
 			<form id="searchBar">
 				<label for="searchBarInput"></label>
 				<input
 					type="search"
 					id="searchBarInput"
-					placeholder="Recherchez un ingrédient, appareil, ustensile ou une recette"
+					placeholder="Rechercher un ingrédient, appareil, ustensile ou une recette"
+					aria-label="Search through site content"
 				/>
 				<i class="fas fa-search"></i>
 			</form>
-
-			<!-- Boutons filtres -->
+			<!-- Filtres -->
 			<div id="filter">
 				<div id="ingredients">
 					<button>
 						Ingrédients <i class="fas fa-chevron-down" id="openIngredientsFilter"></i>
 					</button>
 				</div>
-
 				<div id="appareil">
 					<button>
 						Appareil <i class="fas fa-chevron-down" id="openAppareilFilter"></i>
 					</button>
 				</div>
-
 				<div id="ustensiles">
 					<button>
 						Ustensiles <i class="fas fa-chevron-down" id="openUstensilesFilter"></i>
 					</button>
 				</div>
 			</div>
-		</header>
-
 		<!-- Recettes-->
 		<main id="mainContent"></main>
 	</body>
+	<script src="./js/API/recipesData.js"></script>
+	<script type="module" src="./js/main.js"></script>
 </html>
