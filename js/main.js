@@ -19,3 +19,4 @@ document.getElementById("searchBarInput").addEventListener("keyup", (key) => {
 	Utils.clearRecipes();
 	Builder.init();
 });
+//test
