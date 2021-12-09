@@ -4,7 +4,7 @@ export default class Search {
 	static searchMainInput(value) {
 		let recipesMatched = [];
 
-		recipes.forEach((recipe) => {
+		recipes.filter((recipe) => {
 			if (
 				recipe.name.includes(value) ||
 				recipe.description.includes(value) ||
