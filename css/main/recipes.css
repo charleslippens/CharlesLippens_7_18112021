@@ -33,9 +33,11 @@
 	-webkit-line-clamp: 7;
 	display: -webkit-box;
 	font-size: 0.8rem;
+	align-self: start;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	width: 50%;
+	white-space: normal;
 }
 
 #mainContent > article > div.recipeTitle {
