@@ -2,7 +2,7 @@
 import Builder from "./page/Builder.js";
 import Search from "./search/Search.js";
 import Utils from "./utilities/Utils.js";
-import Messages from "./Msg.js";
+import Messages from "./page/Msg.js";
 
 // Construit par default sans la recherche
 Builder.init();
