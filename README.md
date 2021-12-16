@@ -19,6 +19,7 @@ Proposition de développement de la structure (en cours):
 
 mise en page + fiche d’investigation en cours
 JSBench: https://jsben.ch/ZD9id
+Ebauche Analyse JS: https://github.com/charleslippens/CharlesLippens_7_18112021/blob/main/JS_perfs.pdf
 
 ## Consignes:
 
