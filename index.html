@@ -28,12 +28,28 @@
 				/>
 				<i class="fas fa-search"></i>
 			</form>
+
+			<!-- Badges added dynamically: -->
+			<nav id="tagsBadges">
+				<span id="ingredientTag"></span>
+			</nav>
 			<!-- Filtres -->
 			<div id="filter">
 				<div id="ingredients">
 					<button>
 						Ingrédients <i class="fas fa-chevron-down" id="openIngredientsFilter"></i>
 					</button>
+					<div id="hiddenIngredientsFilter">
+						<label for="inputIngredients"></label>
+						<input
+							type="search"
+							id="inputIngredients"
+							aria-label="Search through ingredients"
+							placeholder="Rechercher un ingrédient"
+						/>
+						<i class="fas fa-chevron-up" id="closeIngredientsFilter"></i>
+						<div id="ingredientsExample"></div>
+					</div>
 				</div>
 				<div id="appareil">
 					<button>
