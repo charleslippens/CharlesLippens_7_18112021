@@ -22,5 +22,6 @@ document.getElementById("searchBarInput").addEventListener("keyup", (key) => {
 	// Reset le build
 	Utils.clearRecipes();
 	Builder.init();
+	//test
 });
 //test
