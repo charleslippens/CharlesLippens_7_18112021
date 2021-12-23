@@ -24,7 +24,7 @@ export default class Ingredients {
 		this.filterTags(recipes);
 	}
 
-	// affiche les ingrédients dans la zaone ingrédient en accord avec  des recettes affichées dans la section recettes
+	// affiche les ingrédients dans la zone ingrédient en accord avec  des recettes affichées dans la section recettes
 	static fillIngredients(ingredients) {
 		let ul = document.createElement("ul");
 		ul.classList.add("listUlIng");
@@ -40,7 +40,7 @@ export default class Ingredients {
 		});
 	}
 
-	// autoriser la recherche pour les ingréidents dans l'input des ingrédients présent dans les recettes affichés
+	// autoriser la recherche pour les ingrédents dans l'input des ingrédients présent dans les recettes affichés
 	static searchInput(ingredients) {
 		document.getElementById("inputIngredients").addEventListener("keyup", (key) => {
 			let valueSearch = key.target.value;

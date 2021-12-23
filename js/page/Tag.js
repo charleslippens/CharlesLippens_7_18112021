@@ -4,6 +4,8 @@ import Display from "./Display.js";
 import Msg from "./Msg.js";
 import Utils from "../utilities/Utils.js";
 import Ingredients from "../filters/Ingredients.js";
+import Appliances from "../filters/Appliances.js";
+import Ustensils from "../filters/Ustensils.js";
 import Data from "../utilities/Data.js";
 
 export default class Badges {
@@ -11,7 +13,7 @@ export default class Badges {
 	static hiddenAppareilFilter = document.querySelector("#hiddenAppareilFilter");
 	static hiddenUstensilesFilter = document.querySelector("#hiddenUstensilesFilter");
 
-	// afficher un badge contenant le tag des ingrédients que l'utilisateur a sélectionné
+	// affichage des badges que le user a sélectionner
 	static buildTags(elt, tag) {
 		this.pushDownButtonsFilter();
 		this.displayTag(elt);
@@ -23,25 +25,30 @@ export default class Badges {
 		return (elt.style.display = "flex");
 	}
 
-	// remplir dans le tag sélectionné
+	// rempli dans les tags
 	static fillTag(elt, tag) {
 		return (elt.innerHTML = tag + ` <i class='far fa-times-circle'></i>`);
 	}
 
-	// supprimer le tag et remplacer les boutons ingrédients
+	//supprime les tags
 	static hideTag(elt) {
 		this.pushUpButtonsFilter();
+
 		return (elt.style.display = "none");
 	}
 
-	// descendre les boutons ingrédients
+	// baisses les bouttons
 	static pushDownButtonsFilter() {
 		this.hiddenIngredientsFilter.style.top = "20rem";
+		this.hiddenAppareilFilter.style.top = "20rem";
+		this.hiddenUstensilesFilter.style.top = "20rem";
 	}
 
-	// monter les boutons ingrédients
+	// monte les bouttons
 	static pushUpButtonsFilter() {
 		this.hiddenIngredientsFilter.style.top = "16.2rem";
+		this.hiddenAppareilFilter.style.top = "16.2rem";
+		this.hiddenUstensilesFilter.style.top = "16.2rem";
 	}
 
 	static removeTagsOnClick(tag, event, eltBadge, recipes) {
@@ -58,5 +65,9 @@ export default class Badges {
 		Display.buildResult(recipes);
 		Utils.clearFilters(document.getElementById("ingredientsExample"));
 		Ingredients.fillIngredients(Data.getAllIngredients(recipes));
+		Utils.clearFilters(document.getElementById("appareilExample"));
+		Appliances.fillAppliances(Data.getAllAppliances(recipes));
+		Utils.clearFilters(document.getElementById("ustensilesExample"));
+		Ustensils.fillUstensils(Data.getAllUstensils(recipes));
 	}
 }
