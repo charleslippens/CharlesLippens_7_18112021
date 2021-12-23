@@ -11,12 +11,16 @@ Builder.init();
 document.getElementById("searchBarInput").addEventListener("keyup", (key) => {
 	let valueSearch = key.target.value;
 	if (Utils.Valid(valueSearch)) {
+		console.time();
+
 		let result = Search.searchMainInput(valueSearch);
 		if (result.recipesMatched.length === 0) {
 			return Messages.buildResultMessageWithNoResult();
 		}
 		Utils.clearRecipes();
 		Builder.initSearch(result);
+		console.timeEnd();
+
 		return;
 	}
 	// Reset le build

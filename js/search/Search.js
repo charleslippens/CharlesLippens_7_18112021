@@ -6,7 +6,6 @@ import Data from "../utilities/Data.js";
 export default class Search {
 	static searchMainInput(value) {
 		let recipesMatched = [];
-
 		for (let i = 0; i < recipes.length; i++) {
 			const { name, ingredients, description } = recipes[i];
 			const includesInName = Utils.normalizeText(name).includes(Utils.normalizeText(value));
@@ -26,6 +25,8 @@ export default class Search {
 		return {
 			recipesMatched,
 			ingredients: Data.getAllIngredients(recipesMatched),
+			appliances: Data.getAllAppliances(recipesMatched),
+			ustensils: Data.getAllUstensils(recipesMatched),
 		};
 	}
 
@@ -56,5 +57,32 @@ export default class Search {
 		});
 
 		return resultIng;
+	}
+	//chercher par tags pour les ustensils
+	static searchByAppTags(recipes, tagApp) {
+		let resultApp = [];
+
+		recipes.forEach((recipe) => {
+			if (Utils.normalizeText(recipe.appliance).includes(tagApp)) {
+				resultApp.push(recipe);
+			}
+		});
+
+		return resultApp;
+	}
+
+	// chercher par tags pour les appareils
+	static searchByUstTags(recipes, tagUst) {
+		let resultUst = [];
+
+		recipes.forEach((recipe) => {
+			recipe.ustensils.forEach((ust) => {
+				if (Utils.normalizeText(ust).includes(tagUst)) {
+					resultUst.push(recipe);
+				}
+			});
+		});
+
+		return resultUst;
 	}
 }

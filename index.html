@@ -32,6 +32,8 @@
 			<!-- Badges ajoutés dynamiquement -->
 			<nav id="tagsBadges">
 				<span id="ingredientTag"></span>
+				<span id="appareilTag"></span>
+				<span id="ustensileTag"></span>
 			</nav>
 			<!-- Filtres -->
 			<div id="filter">
@@ -55,11 +57,34 @@
 					<button>
 						Appareil <i class="fas fa-chevron-down" id="openAppareilFilter"></i>
 					</button>
+					<div id="hiddenAppareilFilter">
+						<label for="inputAppareil"></label>
+						<input
+							type="search"
+							id="inputAppareil"
+							aria-label="Search through appareil"
+							placeholder="Rechercher un appareil"
+						/>
+						<i class="fas fa-chevron-up" id="closeAppareilFilter"></i>
+						<div id="appareilExample"></div>
+					</div>
 				</div>
+
 				<div id="ustensiles">
 					<button>
 						Ustensiles <i class="fas fa-chevron-down" id="openUstensilesFilter"></i>
 					</button>
+					<div id="hiddenUstensilesFilter">
+						<label for="inputUstensiles"></label>
+						<input
+							type="search"
+							id="inputUstensiles"
+							aria-label="Search through ustensiles"
+							placeholder="Rechercher un ustensile"
+						/>
+						<i class="fas fa-chevron-up" id="closeUstensilesFilter"></i>
+						<div id="ustensilesExample"></div>
+					</div>
 				</div>
 			</div>
 
@@ -71,7 +96,7 @@
 		</header>
 		<!-- Recettes-->
 		<main id="mainContent"></main>
+		<script src="./js/API/recipesData.js"></script>
+		<script type="module" src="./js/main.js"></script>
 	</body>
-	<script src="./js/API/recipesData.js"></script>
-	<script type="module" src="./js/main.js"></script>
 </html>
