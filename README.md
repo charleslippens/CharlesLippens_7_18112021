@@ -6,20 +6,6 @@ Branche Filter
 Version de novembre 2021
 
 
-## Etapes:
-
-Proposition de développement de la structure (en cours):
-- CSS
-- Images
-- JS: 
-  - API: fichier de données
-  - Page: Display.js pour l'affichage des recettes
-  - main.js: Appel de l'api construit la section avec toutes les recettes
-- index.html
-
-mise en page + fiche d’investigation en cours
-
-
 ## Consignes:
 
 Analyser un problème informatique
