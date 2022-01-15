@@ -25,6 +25,6 @@ Maquettes: https://www.figma.com/file/xqeE1ZKlHUWi2Efo8r73NK/UI-Design-Les-Petit
 
 Données Recettes : https://github.com/OpenClassrooms-Student-Center/P11-front-end-search-engine/blob/master/recipes.js
 
-## Vérifications (en cours):
+## Vérifications:
 
 W3C CSS et HTML
