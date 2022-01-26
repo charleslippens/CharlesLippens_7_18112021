@@ -43,7 +43,7 @@
 	justify-content: flex-start;
 	margin: 1rem auto;
 	padding: 0;
-	width: 95%;
+	width: 100%;
 }
 
 #hiddenIngredientsFilter,
@@ -53,7 +53,7 @@
 	color: #ffff;
 	display: none;
 	position: absolute;
-	top: 16.2rem;
+	top: 20rem;
 	width: 35rem;
 	z-index: 10;
 }
@@ -90,9 +90,11 @@
 .listUlIng > li,
 .listUlApp > li,
 .listUlUst > li {
-	font-size: 1.21rem;
+	/*font-size: 1.21rem;*/
+	font-size: 1.0rem;
 	overflow: hidden;
-	padding: 0.5rem 1rem;
+	/*padding: 0.5rem 1rem;*/
+	padding: 0.2rem 1rem;
 	text-align: start;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -126,16 +128,82 @@
 	width: 100%;
 }
 
+#inputIngredients::placeholder,
+#inputAppareil::placeholder,
+#inputUstensiles::placeholder {
+	color: #e7e7e7;
+}
+
 #tagsBadges {
 	display: flex;
 	justify-content: flex-start;
-	margin-left: 2.5rem;
+	margin-left: 0rem;
+}
+
+#tagBadges {
+	display: flex;
+	justify-content: flex-start;
+	margin-left: 0rem;
 }
 
 #tagsBadges > #appareilTag,
 #hiddenAppareilFilter,
 #appareil > button,
 #inputAppareil {
+	background-color: #68d9a4;
+}
+
+#tagIngList{
+	display: flex;
+	justify-content: flex-start;
+	margin-left: 0rem;
+}
+
+#tagAppList{
+	display: flex;
+	justify-content: flex-start;
+	margin-left: 0rem;
+}
+
+#tagUstList{
+	display: flex;
+	justify-content: flex-start;
+	margin-left: 0rem;
+}
+
+.eltTagIng {
+	align-items: center;
+	border-radius: 0.25rem;
+	color: #fff;
+	cursor: default;
+	justify-content: space-between;
+	margin: 0.5rem 1rem 0.25rem 0;
+	padding: 1rem 1rem;
+	width: fit-content;
+	background-color: #3282f7;
+}
+
+.eltTagUst {
+	align-items: center;
+	border-radius: 0.25rem;
+	color: #fff;
+	cursor: default;
+	justify-content: space-between;
+	margin: 0.5rem 1rem 0.25rem 0;
+	padding: 1rem 1rem;
+	width: fit-content;
+	background-color: #ed6454;
+}
+
+.eltTagApp {
+	align-items: center;
+	border-radius: 0.25rem;
+	color: #fff;
+	cursor: default;
+	justify-content: space-between;
+	margin: 0.5rem 1rem 0.25rem 0;
+	padding: 1rem 1rem;
+	width: fit-content;
 	background-color: #68d9a4;
 }
 
@@ -169,6 +237,7 @@
 #appareilTag > i,
 #ustensileTag > i {
 	margin-left: 0.5rem;
+	margin-right: 0.5rem;
 }
 
 .listUlUst > li:hover {
@@ -187,3 +256,4 @@
 		margin-right: 2rem;
 	}
 }
+

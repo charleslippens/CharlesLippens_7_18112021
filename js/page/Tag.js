@@ -13,11 +13,11 @@ export default class Badges {
 	static hiddenAppareilFilter = document.querySelector("#hiddenAppareilFilter");
 	static hiddenUstensilesFilter = document.querySelector("#hiddenUstensilesFilter");
 
-	// affichage des badges que le user a sélectionner
-	static buildTags(elt, tag) {
-		this.pushDownButtonsFilter();
-		this.displayTag(elt);
-		this.fillTag(elt, tag);
+	// affichage des badges que le user a sélectionné
+	static buildTags(elt, selected,i){
+		//this.pushDownButtonsFilter();
+		this.displayTag(elt); //affiche le tag vide 
+		this.fillTag(elt, selected[i]);
 		return this;
 	}
 
@@ -51,23 +51,4 @@ export default class Badges {
 		this.hiddenUstensilesFilter.style.top = "16.2rem";
 	}
 
-	static removeTagsOnClick(tag, event, eltBadge, recipes) {
-		tag.addEventListener("click", () => {
-			this.resetSection(event, eltBadge, recipes);
-		});
-	}
-
-	static resetSection(event, eltBadge, recipes) {
-		event.target.classList.remove("selected");
-		this.hideTag(eltBadge);
-		Msg.buildResultMessageWithResult(recipes);
-		Utils.clearRecipes();
-		Display.buildResult(recipes);
-		Utils.clearFilters(document.getElementById("ingredientsExample"));
-		Ingredients.fillIngredients(Data.getAllIngredients(recipes));
-		Utils.clearFilters(document.getElementById("appareilExample"));
-		Appliances.fillAppliances(Data.getAllAppliances(recipes));
-		Utils.clearFilters(document.getElementById("ustensilesExample"));
-		Ustensils.fillUstensils(Data.getAllUstensils(recipes));
-	}
 }

@@ -38,7 +38,7 @@ export default class Utils {
 		);
 	}
 
-	// Collect tous les ingrédient et les tris alphabétiquement
+	// Tri alphabétique de array
 	static sortByTitle(array) {
 		let arrayNoSort = [...new Set(array)];
 		let arraySort = arrayNoSort.sort((a, b) => {

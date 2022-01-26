@@ -12,11 +12,11 @@
 	<body>
 		<!-- En tete-->
 		<header>
-			<img
-				src="https://res.cloudinary.com/dlpyn3wxf/image/upload/v1619049061/logo-les-petits-plats_jagbwd.png"
-				alt="Les petits plats"
-			/>
-
+		<a href="index.html">
+				<img
+					src="./images/logo-les-petits-plats_jagbwd.png"
+					alt="Les petits plats"
+					/></a>
 			<!-- Barre de recherche -->
 			<form id="searchBar">
 				<label for="searchBarInput"></label>
@@ -30,13 +30,15 @@
 			</form>
 
 			<!-- Badges ajoutés dynamiquement -->
-			<nav id="tagsBadges">
-				<span id="ingredientTag"></span>
-				<span id="appareilTag"></span>
-				<span id="ustensileTag"></span>
-			</nav>
+			<div id="tagBadges">
+				<span id="tagIngList"></span>
+				<span id="tagAppList"></span>
+				<span id="tagUstList"></span>
+			</div>
+
 			<!-- Filtres -->
 			<div id="filter">
+
 				<div id="ingredients">
 					<button>
 						Ingrédients <i class="fas fa-chevron-down" id="openIngredientsFilter"></i>
@@ -53,6 +55,7 @@
 						<div id="ingredientsExample"></div>
 					</div>
 				</div>
+
 				<div id="appareil">
 					<button>
 						Appareil <i class="fas fa-chevron-down" id="openAppareilFilter"></i>
