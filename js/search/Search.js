@@ -2,30 +2,39 @@
 
 import Utils from "../utilities/Utils.js";
 import Data from "../utilities/Data.js";
+import { result } from "../main.js";
+
 
 export default class Search {
+
+	// Recherche des recettes pour un input dans la barre principale
+	//
 	static searchMainInput(value) {
 		let recipesMatched = [];
+		
+		// Méthode filter
 		recipes.filter((recipe) => {
 			if (
 				Utils.normalizeText(recipe.name).includes(Utils.normalizeText(value)) ||
 				Utils.normalizeText(recipe.description).includes(Utils.normalizeText(value)) ||
 				recipe.ingredients.some((elt) =>
-					Utils.normalizeText(elt.ingredient).includes(value)
+					Utils.normalizeText(elt.ingredient).includes(Utils.normalizeText(value))
 				)
 			) {
 				recipesMatched.push(recipe);
 			}
 		});
-		return {
-			recipesMatched: recipesMatched,
-			ingredients: Data.getAllIngredients(recipesMatched),
-			appliances: Data.getAllAppliances(recipesMatched),
-			ustensils: Data.getAllUstensils(recipesMatched),
-		};
+
+		result.recipesMatched = recipesMatched;
+		result.ingredients= Data.getAllIngredients(recipesMatched);
+		result.appliances= Data.getAllAppliances(recipesMatched);
+		result.ustensils= Data.getAllUstensils(recipesMatched);
+		//console.log("SearchMainInput / result:",result)
+
 	}
 
-	// chercher par input pour les ingrédients
+	// Filtre des listes Ing/App/Ust (collection) à partir d'un input (value) dans la barre de recherche des Ing/App/Ust
+	//
 	static searchInputFilters(collection, value) {
 		let resultInput = [];
 		collection.forEach((elt) => {
@@ -33,51 +42,95 @@ export default class Search {
 				resultInput.push(elt);
 			}
 		});
-
+		//console.log("search.InputFilters1:", resultInput);
 		return resultInput;
 	}
 
-	// chercher par tags pour les ingrédients
-	static searchByIngTags(recipes, tagIng) {
+	// Recherche des recettes pour un input dans la barre Ingrédients
+	//
+	static searchByIngTags(tagIng) {
 		let resultIng = [];
-
-		recipes.forEach((recipe) => {
-			if (
-				recipe.ingredients.some((elt) =>
-					Utils.normalizeText(elt.ingredient).includes(tagIng)
-				)
-			) {
-				resultIng.push(recipe);
-			}
-		});
-
-		return resultIng;
-	}
-	//chercher par tags pour les ustensils
-	static searchByAppTags(recipes, tagApp) {
-		let resultApp = [];
-
-		recipes.forEach((recipe) => {
-			if (Utils.normalizeText(recipe.appliance).includes(tagApp)) {
-				resultApp.push(recipe);
-			}
-		});
-
-		return resultApp;
-	}
-
-	// chercher par tags pour les appareils
-	static searchByUstTags(recipes, tagUst) {
-		let resultUst = [];
-
-		recipes.forEach((recipe) => {
-			recipe.ustensils.forEach((ust) => {
-				if (Utils.normalizeText(ust).includes(tagUst)) {
-					resultUst.push(recipe);
-				}
+		resultIng.splice(0);
+		let resultIng2 = result.recipesMatched;
+		let selectlen = tagIng.length;
+		//console.log("recipes0:", resultIng);
+		//console.log("recipes1:", resultIng2);
+		//console.log("recipes2:", selectlen);
+		//Boucle sur les tags sélectionnés tagIng[i] pour mettre les recettes dans resultIng2
+		for (let i = 0; i<selectlen;i++) {
+			resultIng2.forEach((recipe) => {
+				if (recipe.ingredients.some((elt) => Utils.normalizeText(elt.ingredient).includes(Utils.normalizeText(tagIng[i])))) {
+					resultIng.push(recipe);
+				};
 			});
-		});
-
-		return resultUst;
+			resultIng2 = resultIng.slice();
+			resultIng.splice(0);
+			//console.log("resultIng:",resultIng);
+			//console.log("resultIng2:",resultIng2);
+		};
+		// maj de result
+		result.recipesMatched = resultIng2;
+		result.ingredients= Data.getAllIngredients(resultIng2);
+		result.appliances= Data.getAllAppliances(resultIng2);
+		result.ustensils= Data.getAllUstensils(resultIng2);
 	}
+
+	// Recherche des recettes pour un input dans la barre Appareil
+	//
+	static searchByAppTags(tagApp) {
+		let resultApp = [];
+		resultApp.splice(0);
+		let resultApp2 = result.recipesMatched;
+		let selectlen = tagApp.length;
+		//console.log("recipes0:", resultApp);
+		//console.log("recipes1:", resultApp2);
+		//console.log("recipes2:", selectlen);
+		//Boucle sur les tags sélectionnés tagIng[i] pour mettre les recettes dans resultIng2
+		for (let i = 0; i<selectlen;i++) {
+			resultApp2.forEach((recipe) => {
+				if (Utils.normalizeText(recipe.appliance).includes(Utils.normalizeText(tagApp[i]))) {
+				resultApp.push(recipe);
+				};
+			});
+			resultApp2 = resultApp.slice();
+			resultApp.splice(0);
+			//console.log("resultApp:",resultApp);
+			//console.log("resultApp2:",resultApp2);
+		};
+		// maj de result
+		result.recipesMatched = resultApp2;
+		result.ingredients= Data.getAllIngredients(resultApp2);
+		result.appliances= Data.getAllAppliances(resultApp2);
+		result.ustensils= Data.getAllUstensils(resultApp2);
+	};
+
+	// Recherche des recettes pour un input dans la barre Ustensiles
+	//
+	static searchByUstTags(tagUst) {
+		let resultUst = [];
+		resultUst.splice(0);
+		let resultUst2 = result.recipesMatched;
+		let selectlen = tagUst.length;
+		//console.log("recipes0:", resultUst);
+		//console.log("recipes1:", resultUst2);
+		//console.log("recipes2:", selectlen);
+		//Boucle sur les tags sélectionnés tagIng[i] pour mettre les recettes dans resultIng2
+		for (let i = 0; i<selectlen;i++) {
+			resultUst2.forEach((recipe) => {
+				if (recipe.ustensils.some((elt) => Utils.normalizeText(elt).includes(Utils.normalizeText(tagUst[i])))) {
+					resultUst.push(recipe);
+				};
+			});
+			resultUst2 = resultUst.slice();
+			resultUst.splice(0);
+			//console.log("resultUst:",resultUst);
+			//console.log("resultUst2:",resultUst2);
+		};
+		// maj de result
+		result.recipesMatched = resultUst2;
+		result.ingredients= Data.getAllIngredients(resultUst2);
+		result.appliances= Data.getAllAppliances(resultUst2);
+		result.ustensils= Data.getAllUstensils(resultUst2);
+	}
+
 }

@@ -9,10 +9,9 @@ export default class Display {
 		});
 	}
 
-	// construite chaque recette
+	// construit chaque recette
 	static buildRecipe(collection) {
 		let section = document.getElementById("mainContent");
-
 		return section.appendChild(this.createArticleElt(collection));
 	}
 

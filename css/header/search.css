@@ -5,8 +5,8 @@
 	font-size: 1.2rem;
 	justify-content: space-between;
 	margin-bottom: 2rem;
-	margin-left: 3rem;
-	margin-right: 3rem;
+	margin-left: 0rem;
+	margin-right: 0rem;
 	overflow: hidden;
 	padding: 1rem;
 }
@@ -14,7 +14,7 @@
 #searchBar {
 	margin: 0 auto;
 	position: relative;
-	width: 95%;
+	width: 100%;
 }
 
 #searchBar > i {
