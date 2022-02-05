@@ -2,37 +2,43 @@
 
 export default class Data {
 
-	// récupère les ingrédients des recettes du tableau "ing"
+	// Met dans [ingredients] tous les ingrédients des recettes [ing] sans doublons
+	//									> [recipe.[ingredients.(ingredientt.ingredient)]]
 	static getAllIngredients(ing) {
-		let ingredients = [];
+		let allIngredients = [];
 		ing.forEach((recipe) => {
-			recipe.ingredients.forEach((ing) => {
-				if (!ingredients.includes(ing.ingredient.toLowerCase())) {
-					ingredients.push(ing.ingredient.toLowerCase());}
+			recipe.ingredients.forEach((ingredientt) => {
+				if (!allIngredients.includes(ingredientt.ingredient.toLowerCase())) {
+					allIngredients.push(ingredientt.ingredient.toLowerCase());
+				}
 			});
 		});
-		return ingredients;
+		return allIngredients;
 	}
 
-	// récupère les appareils des recettes du tableau "app"
+	// Met dans [appliances] tous les appareils des recettes [app] sans doublons
+	//									> [recipe.(appliance)]
 	static getAllAppliances(app) {
-		let appliances = [];
+		let allAppliances = [];
 		app.forEach((recipe) => {
-			if (!appliances.includes(recipe.appliance.toLowerCase()))
-				appliances.push(recipe.appliance.toLowerCase());
+			if (!allAppliances.includes(recipe.appliance.toLowerCase())) {
+				allAppliances.push(recipe.appliance.toLowerCase());
+			}
 		});
-		return appliances;
+		return allAppliances;
 	}
 
-	// récupère les ustensiles des recettes du tableau "ust"
+	// Met dans [ustensils] tous les ustensiles des recettes [ust]
+	//									> [recipe.[ustensils.(ustensil)]]
 	static getAllUstensils(ust) {
-		let ustensils = [];
+		let allUstensils = [];
 		ust.forEach((recipe) => {
 			recipe.ustensils.forEach((ustensil) => {
-				if (!ustensils.includes(ustensil.toLowerCase()))
-					ustensils.push(ustensil.toLowerCase());
+				if (!allUstensils.includes(ustensil.toLowerCase())) {
+					allUstensils.push(ustensil.toLowerCase());
+				}
 			});
 		});
-		return ustensils;
+		return allUstensils;
 	}
 }

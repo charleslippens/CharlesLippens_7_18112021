@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,36 +10,36 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" />
 		<link rel="stylesheet" href="./css/style.css" />
 	</head>
+	
 	<body>
-		<!-- En tete-->
+		<!-- En tete -->
 		<header>
-		<a href="index.html">
-				<img
-					src="./images/logo-les-petits-plats_jagbwd.png"
-					alt="Les petits plats"
-					/></a>
-			<!-- Barre de recherche -->
+			<!-- Logo -->
+			<a href="index.html">
+				<img src="./images/logo-les-petits-plats_jagbwd.png" alt="Les petits plats" />
+			</a>
+			<!-- Barre de recherche générale -->
 			<form id="searchBar">
 				<label for="searchBarInput"></label>
 				<input
 					type="search"
 					id="searchBarInput"
-					placeholder="Rechercher un ingrédient, appareil, ustensile ou une recette"
+					placeholder="Rechercher un ingrédient, un appareil, un ustensile ou une recette"
 					aria-label="Search through site content"
 				/>
 				<i class="fas fa-search"></i>
 			</form>
 
-			<!-- Badges ajoutés dynamiquement -->
+			<!-- Badges (Tags) ajoutés dynamiquement -->
 			<div id="tagBadges">
 				<span id="tagIngList"></span>
 				<span id="tagAppList"></span>
 				<span id="tagUstList"></span>
 			</div>
 
-			<!-- Filtres -->
+			<!-- Filtres spécifiques -->
 			<div id="filter">
-
+				<!-- Filtre Ingrédients -->
 				<div id="ingredients">
 					<button>
 						Ingrédients <i class="fas fa-chevron-down" id="openIngredientsFilter"></i>
@@ -55,7 +56,7 @@
 						<div id="ingredientsExample"></div>
 					</div>
 				</div>
-
+				<!-- Filtre Appareil -->
 				<div id="appareil">
 					<button>
 						Appareil <i class="fas fa-chevron-down" id="openAppareilFilter"></i>
@@ -72,7 +73,7 @@
 						<div id="appareilExample"></div>
 					</div>
 				</div>
-
+				<!-- Filtre Ustensiles -->
 				<div id="ustensiles">
 					<button>
 						Ustensiles <i class="fas fa-chevron-down" id="openUstensilesFilter"></i>
@@ -91,15 +92,19 @@
 				</div>
 			</div>
 
-			<!-- Affichage dynamique -->
+			<!-- Affichage du nombre de recettes -->
 			<aside id="resultMessage">
 				<span>Aucun résultat</span>
 				<i class="far fa-times-circle"></i>
 			</aside>
 		</header>
-		<!-- Recettes-->
+
+		<!-- Affichage des Recettes -->
 		<main id="mainContent"></main>
+
+		<!-- Appel du js -->
 		<script src="./js/API/recipesData.js"></script>
 		<script type="module" src="./js/main.js"></script>
 	</body>
+	
 </html>

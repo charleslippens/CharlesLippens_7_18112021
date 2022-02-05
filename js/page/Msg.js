@@ -4,23 +4,23 @@ export default class Messages {
 	static resultMessage = document.getElementById("resultMessage");
 	static resultSpan = document.querySelector("#resultMessage > span");
 
-	// affiche le message avec le nombre de recettes correspondant à la recherche
-	static buildResultMessageWithResult(recipes) {
+	// Affiche le message indiquant le nombre de recettes correspondant à la recherche
+	//
+	static buildResultMessageWithResult(recipesMatched) {
 		this.displayMessage();
 		this.resultMessage.style.backgroundColor = "#c4dcff";
 		// test pour affichage singulier/pluriel
-		if (recipes.length === 1) {
-			this.resultSpan.innerHTML =
-			recipes.length + " recette correspond à votre recherche";	
+		if (recipesMatched.length === 1) {
+			this.resultSpan.innerHTML =	recipesMatched.length + " recette correspond à votre recherche";	
 		} else {
-		this.resultSpan.innerHTML =
-			recipes.length + " recettes correspondent à votre recherche";
+			this.resultSpan.innerHTML =	recipesMatched.length + " recettes correspondent à votre recherche";
 		}
 		this.hideMessageOnClick();
 		return this;
 	}
 
-	// affiche le message indicant à l'utilisateur qu'aucune recette n'a été trouvée
+	// Affiche le message si aucune recette n'a été trouvée
+	//
 	static buildResultMessageWithNoResult() {
 		this.displayMessage();
 		this.resultMessage.style.backgroundColor = "#FFE9A5";
@@ -29,15 +29,20 @@ export default class Messages {
 		return this;
 	}
 
-	// affiche le message contenant le nombre de recettes
+	// Affiche le message
+	//
 	static displayMessage() {
 		return (this.resultMessage.style.display = "flex");
 	}
 
-	// fait disparaitre le message contenant le nombre de recettes
+	// Supprime le message 
+	//
 	static hideMessage() {
 		return (this.resultMessage.style.display = "none");
 	}
+
+	// Active suppression du message par "click"
+	//
 	static hideMessageOnClick() {
 		document.querySelector("#resultMessage > i").addEventListener("click", () => {
 			return this.hideMessage();

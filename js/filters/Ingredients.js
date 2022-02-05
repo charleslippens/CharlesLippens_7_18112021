@@ -4,7 +4,6 @@ import Button from "../page/Button.js";
 import Display from "../page/Display.js";
 import Messages from "../page/Msg.js";
 import Search from "../search/Search.js";
-import Tag from "../page/Tag.js";
 import Utils from "../utilities/Utils.js";
 import Data from "../utilities/Data.js";
 import Appliances from "./Appliances.js";
@@ -14,7 +13,8 @@ import { result } from "../main.js";
 export default class Ingredients {
 	static ingredientsExample = document.getElementById("ingredientsExample");
 
-// appelé par builder pour afficher ttes les recettes (init) ou le résultat d'une recherche générale (initSearch)
+	// Initialisation (builder.init) ou maj (builder.iniSearch) de la liste des ingrédients dans filtre
+	//
 	static init() {
 		Utils.clearFilters(this.ingredientsExample);
 		Button.launchButtons(
@@ -23,13 +23,15 @@ export default class Ingredients {
 			document.querySelector("#closeIngredientsFilter"),
 			document.querySelector("#hiddenIngredientsFilter")
 		);
+		// Tri des ingrédients par ordre alpha. et association html pour liste du filtre
 		let ingredientsSorted = Utils.sortByTitle(result.ingredients);
-		this.fillIngredients(ingredientsSorted);  
+		this.fillIngredients(ingredientsSorted);
+		// Maj de la liste du filtre selon input dans sa barre de recherche  
 		this.searchInput();  
-		//this.filterTags(result.recipesMatched);
 	}
 
-	// affiche la liste des ingrédients sélectionnés dans le tag ingrédient 
+	// HTML de la liste des ingrédients du filtre
+	//
 	static fillIngredients(ingredientsSorted) {
 		let ul = document.createElement("ul");
 		ul.classList.add("listUlIng");
@@ -43,7 +45,8 @@ export default class Ingredients {
 		});
 	}
 
-	// autorise la recherche pour les ingrédents dans l'input du tag ingrédients
+	// Recherche de input dans la liste des ingrédents du filtre et maj de la liste
+	//
 	static searchInput() {
 		document.getElementById("inputIngredients").addEventListener("keyup", (key) => {
 			let valueSearch = key.target.value;
@@ -56,70 +59,49 @@ export default class Ingredients {
 		});
 	}
 
-	// Fonction filtre Ingrédients
-	//
+	// Filtre les recettes en fonction des ingrédients sélectionnés: 
+	//		> sélection d'un item dans la liste des ingrédients, affichage des tags et des recettes
 	static filterTags() {
-		//let ingredientTag = document.getElementById("ingredientTag");
-		//console.log("INGREDIENTS - FILTAGINIT / selectedIng :",result.selectedIng);
 
-	//	Ecoute sur le bouton Ingrédients et ajout d'un tag ingrédient
-	//		
+		//	Ecoute sur le bouton Ingrédients 
 		document.querySelector("#ingredientsExample").addEventListener("click", (event) => {
-			
-			//?
-			//let classValue = event.target.classList.value;
 			let ingTag = event.target.getAttribute("data-filter");
 			var myIndex = result.selectedIng.indexOf(ingTag);
 
-			// teste si le tag a déjà été sélectionné (existe dans selectedApp?) et s'il existe
-			if (myIndex === -1 && ingTag !== null ) {   			
-				//console.log("INGREDIENTS - AJ / result:",result.recipesMatched);
-				//console.log("INGREDIENTS - AJAV / selectedIng :",result.selectedIng);
+			// Teste si l'item n'est pas sélectionné (existe dans selectedIng?) et s'il existe (pb hors liste)
+			if (myIndex === -1 && ingTag !== null ) {   			   			
 				event.target.classList.add("result.selectedIng");
-			
-				// ajout de l'ingrédient dans selectedIng
+				// Ajout de l'item dans selectedIng
 				result.selectedIng.push(ingTag);
-				//console.log("INGREDIENTS - AJAP / selectedIng: ",result.selectedIng);
-			
-			// suppression du bouton Ingrédients
+				// Fermeture affichage liste après sélection de l'item
 				Button.hideButtonsOnClick(
 					document.querySelector("#ingredients > button"),
 					document.querySelector("#openIngredientsFilter"),
 					document.querySelector("#hiddenIngredientsFilter")
 				);
-			
-			// Affichage des tags sous la barre de recherche principale
-			// 
+				// Pour affichage des tags sous la barre de recherche principale
 				let tagList = document.getElementById("tagIngList");
-				// suppression des tags de la recherche précédente
+				// Suppression des tags de la recherche précédente
 				tagList.innerHTML='';
-				// Boucle sur les tags sélectionnés
+				// Affichage des tags pour les items sélectionnés
 				for (let i = 0 ; i<result.selectedIng.length ; i++) {
 					if (result.selectedIng[i] !== "") {
 						// Création du tag i pour html
 						var eltTag = document.createElement("span");
 						eltTag.setAttribute("id",result.selectedIng[i]);
 						eltTag.setAttribute("class","eltTagIng");
-						//Tag.buildTags(ingredientTag,result.selectedIng,i).pushDownButtonsFilter();
-						eltTag.innerHTML = result.selectedIng[i] + ` <i class='far fa-times-circle'></i>`;
-						//document.querySelector("#result.selectedIng[i]").addEventListener("click", console.log("add:",i));
+						eltTag.innerHTML = result.selectedIng[i] + "&nbsp&nbsp&nbsp" + "<i class='far fa-times-circle'></i>";
 						tagList.appendChild(eltTag);
-						// pour test addEvent
-						//document.getElementById(result.selectedIng[i]).addEventListener("click", function() {console.log("list",i)});
-						//console.log("addevent:",i,result.selectedIng[i]);
 						document.getElementById(result.selectedIng[i]).addEventListener("click", () => {this.removeTag(result.selectedIng[i])});
 					}
 				};
-
-				// Recherche des recettes qui correspondent aux tags de selectedIng pour maj de result
+				// Recherche des recettes qui correspondent aux items dans selectedIng et MAJ de result
 				Search.searchByIngTags(result.selectedIng);
-			
-				// Effacement des recettes et affichages des recettes sélectionnées + message sur la page
+				// Effacement des anciennes recettes et affichages des recettes sélectionnées + message nbre de recettes
 				Utils.clearRecipes();
 				Display.buildResult(result.recipesMatched);
 				Messages.buildResultMessageWithResult(result.recipesMatched);
-			
-				// maj des listes des 3 filtres
+				// Maj des listes des 3 filtres
 				Utils.clearFilters(this.ingredientsExample);
 				this.fillIngredients(Utils.sortByTitle(Data.getAllIngredients(result.recipesMatched)));
 				Utils.clearFilters(Appliances.appliancesExample);
@@ -127,6 +109,7 @@ export default class Ingredients {
 				Utils.clearFilters(Ustensils.ustensilsExample);
 				Ustensils.fillUstensils(Utils.sortByTitle(Data.getAllUstensils(result.recipesMatched)));
 			} else {
+				// Si item déjà sélectionné ou n'existe pas on ferme la liste
 				Button.hideButtonsOnClick(
 					document.querySelector("#ingredients > button"),
 					document.querySelector("#openIngredientsFilter"),
@@ -136,73 +119,58 @@ export default class Ingredients {
 		});
 	}
 
-	// Fonction suppression d'un tag
+	// Supprime un item ingrédient par suppression de son tag (tagSelected) et refait une recherche 
 	//
 	static removeTag(tagSelected) {
-		//console.log("INGREDIENTS - SUP: OK");
-		//console.log("INGREDIENTS - SUP.AV / selectedIng:", result.selectedIng)
-		//console.log("INGREDIENTS - SUP.AV / tagSelected:", tagSelected)
 
-		// Suppresion de l'affichage du tag
-		//Tag.hideTag(tagSelected); //old
+		// Supprime le tag affiché
 		let tagRemoved = document.getElementById(tagSelected);
-		//let aa = tagRemoved.className
 		tagRemoved.setAttribute("style","display:none")
 		tagRemoved.innerHTML='';
-		// maj de selectedIng après suppresion du tag
+		// Maj de selectedIng après suppresion du tag: item > ""
 		var myIndex = result.selectedIng.indexOf(tagSelected);
 		if (myIndex !== -1) {
     		result.selectedIng.splice(myIndex, 1,"");
 		}
-		//???? event.target.classList.remove("result.selectedIng"); //???
-		//console.log("INGREDIENTS - SUP.AP / selectedIng:", result.selectedIng)
+		// Si selectIng ne contient que des "" alors on le vide
 		let tabVide = true;
-		if(result.selectedIng.length!==0){
+		if(result.selectedIng.length!==0) {
 			for (let i=0 ; i<result.selectedIng.length ; i++) {
-				if(result.selectedIng[i] !== ""){
-					tabVide = false
-					//console.log("vide:",tabVide);
+				if(result.selectedIng[i] !== "") {
+					tabVide = false;
 				}
 			}
-			if(tabVide){
+			if(tabVide) {
 				result.selectedIng.splice(0,result.selectedIng.length);
-				//console.log("ress:",result.selectedIng);
 			}
 		}
-		//console.log("INGREDIENTS - SUP.APVIDE / selectedIng:", result.selectedIng)
 
 		// Relance de la recherche des recettes pour maj de result
 		//
-		// lecture de la valeur input de recherche générale
+		// Lecture de la valeur input de la barre de recherche générale
 		let valueSearch = document.getElementById("searchBarInput").value;
-		//console.log("INGREDIENTS - SUPRECHGEN  / valueSearch:", valueSearch)
-		// recherche générale avec input pour maj de results, sinon recipes
+		// Recherche générale avec input de 3 caractères et maj de results
 		if (Utils.Valid(valueSearch)) {
 			Search.searchMainInput(valueSearch);						
-			//console.log("INGREDIENTS - SUPRECHGEN / recipesMatched",result);
 			Builder.initSearch();
 		} else {
+			// sinon on met toutes les recettes dans result
 			result.recipesMatched = recipes;
 			result.ingredients= Data.getAllIngredients(recipes);
 			result.appliances= Data.getAllAppliances(recipes);
 			result.ustensils= Data.getAllUstensils(recipes);
 		}
 
-		// Recherche des recettes avec App/Ust (non modifiés)
+		// Sélection des recettes avec les tags de App/Ust (items non modifiés)
 		Search.searchByAppTags(result.selectedApp);
 		Search.searchByUstTags(result.selectedUst);
-
-		// recherche par tags ingrédients dans selectedIng pour maj de result
+		// Sélection des recettes avec les tags ingrédients restants et maj de result
 		Search.searchByIngTags(result.selectedIng);
-		//console.log("INGREDIENTS - SUPRECHTAG / result",result);
-		// Effacement des recettes affichées
+		// Effacement des anciennes recettes, affichage des recettes sélectionnées et de leur nbre 
 		Utils.clearRecipes();
-		// Affichage des recettes sélectionnées
 		Display.buildResult(result.recipesMatched);
-		//console.log("INGREDIENTS - SUPRECHTAG / recettes filtrées:", result.recipesMatched)
-		// Affichage du nbre de recettes
 		Messages.buildResultMessageWithResult(result.recipesMatched);
-		// maj des listes des tags
+		// Maj des listes des filtres
 		Utils.clearFilters(this.ingredientsExample);
 		this.fillIngredients(Utils.sortByTitle(Data.getAllIngredients(result.recipesMatched)));
 		Utils.clearFilters(Appliances.appliancesExample);
@@ -210,5 +178,4 @@ export default class Ingredients {
 		Utils.clearFilters(Ustensils.ustensilsExample);
 		Ustensils.fillUstensils(Utils.sortByTitle(Data.getAllUstensils(result.recipesMatched)));
 	}
-
 }
