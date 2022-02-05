@@ -13,31 +13,40 @@ export default class Builder {
 	// Initialisation générale des recherches à partir de toutes les recettes (recipes)
 	//
 	static init() {
-		// Initialisation de result
+		
+		// Initialisation de result avec toutes les recettes
 		result.recipesMatched = recipes;
 		result.ingredients= Data.getAllIngredients(recipes);
 		result.appliances= Data.getAllAppliances(recipes);
 		result.ustensils= Data.getAllUstensils(recipes);
+		
 		// Affichage des recettes
-		Display.buildResult(result.recipesMatched);
+		Display.buildResult(recipes);
 		Messages.hideMessage();
+		
 		// Initialisation des recherches par tags
 		Ingredients.init();
 		Appliances.init();
 		Ustensils.init();
 	}
 
-	// Initialisation des recherches intermédiaires à partir des recettes déjà sélectionnées (result.recipesMatched) 
+	// Initialisation des recherches par item après recherche générale (result.recipesMatched) 
 	//
 	static initSearch() {
-		// Affichage des recettes sélectionnées
+
+		// Affichage des recettes sélectionnées et de leur nombre
 		Display.buildResult(result.recipesMatched);
 		Messages.buildResultMessageWithResult(result.recipesMatched);
-		//console.log("Display initSearch: ",result.recipesMatched);
-		// Initialisation recherche suivante  
+
+		// test - à supprimer
+		//result.ingredients= Data.getAllIngredients(result.recipesMatched);
+		//result.appliances= Data.getAllAppliances(result.recipesMatched);
+		//result.ustensils= Data.getAllUstensils(result.recipesMatched);
+		//console.log("Display initSearch: ",result.ingredients);
+
+		// Maj des listes des filtres  
 		Ingredients.init();
 		Appliances.init();
 		Ustensils.init();
 	}
-
 }
