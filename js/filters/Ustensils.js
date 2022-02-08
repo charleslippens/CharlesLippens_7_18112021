@@ -73,6 +73,19 @@ export default class Ustensils {
 				event.target.classList.add("result.selectedUst");
 				// Ajout de l'item dans selectedIng
 				result.selectedUst.push(ustTag);
+				// Position de la liste
+				let topListIng = document.getElementById("hiddenIngredientsFilter");
+				let topListApp = document.getElementById("hiddenAppareilFilter");
+				let topListUst = document.getElementById("hiddenUstensilesFilter");
+				if (result.selectedIng.length !==0 || result.selectedApp.length !==0 || result.selectedUst.length !==0){
+					topListIng.style.top = "20rem";
+					topListApp.style.top = "20rem";
+					topListUst.style.top = "20rem";
+					} else {
+					topListIng.style.top = "16.2rem";
+					topListApp.style.top = "16.2rem";
+					topListUst.style.top = "16.2rem";
+				}
 				// Fermeture affichage liste après sélection de l'item
 				Button.hideButtonsOnClick(
 					document.querySelector("#ustensiles > button"),
@@ -169,13 +182,30 @@ export default class Ustensils {
 		// Effacement des anciennes recettes, affichage des recettes sélectionnées et de leur nbre 
 		Utils.clearRecipes();
 		Display.buildResult(result.recipesMatched);
-		Messages.buildResultMessageWithResult(result.recipesMatched);
-		// Maj des listes des filtres
+		if (!Utils.Valid(valueSearch) && result.selectedIng.length === 0 && result.selectedApp.length === 0 && result.selectedUst.length === 0) {
+			Messages.hideMessage();
+		} else {
+			Messages.buildResultMessageWithResult(result.recipesMatched);
+		}
+		// maj des listes des filtres
 		Utils.clearFilters(this.ustensilsExample);
 		this.fillUstensils(Utils.sortByTitle(Data.getAllUstensils(result.recipesMatched)));
 		Utils.clearFilters(Appliances.appliancesExample);
 		Appliances.fillAppliances(Utils.sortByTitle(Data.getAllAppliances(result.recipesMatched)));
 		Utils.clearFilters(Ingredients.ingredientsExample);
 		Ingredients.fillIngredients(Utils.sortByTitle(Data.getAllIngredients(result.recipesMatched)));
+		// Position de la liste
+		let topListIng = document.getElementById("hiddenIngredientsFilter");
+		let topListApp = document.getElementById("hiddenAppareilFilter");
+		let topListUst = document.getElementById("hiddenUstensilesFilter");
+		if (result.selectedIng.length !==0 || result.selectedApp.length !==0 || result.selectedUst.length !==0){
+			topListIng.style.top = "20rem";
+			topListApp.style.top = "20rem";
+			topListUst.style.top = "20rem";
+			} else {
+			topListIng.style.top = "16.2rem";
+			topListApp.style.top = "16.2rem";
+			topListUst.style.top = "16.2rem";
+		}
 	}
 }

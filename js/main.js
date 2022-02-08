@@ -29,7 +29,6 @@ document.getElementById("searchBarInput").addEventListener("keyup", (key) => {
 	const tagBadges = document.getElementById('tagBadges');
 	tagBadges.innerHTML = ``;
 	tagBadges.innerHTML='<div id="tagBadges"><span id="tagIngList"></span><span id="tagAppList"></span>	<span id="tagUstList"></span></div>'
-	
 	// Recherche générale possible si plus de 3 caractères
 	if (Utils.Valid(valueSearch)) {
 		Search.searchMainInput(valueSearch);
@@ -57,7 +56,15 @@ document.getElementById("searchBarInput").addEventListener("keyup", (key) => {
 	result.selectedApp=[];
 	Appliances.filterTags();
 	result.selectedUst=[];
-	Ustensils.filterTags();}
+	Ustensils.filterTags();
+	// Position des filtres
+	let topListIng = document.getElementById("hiddenIngredientsFilter");
+	topListIng.style.top = "16.2rem";
+	let topListApp = document.getElementById("hiddenAppareilFilter");
+	topListApp.style.top = "16.2rem";
+	let topListUst = document.getElementById("hiddenUstensilesFilter");
+	topListUst.style.top = "16.2rem";
+	}
 });
 
 // Activation des filtres sans recherche générale 
