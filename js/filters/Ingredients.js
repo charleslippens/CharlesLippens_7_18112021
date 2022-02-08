@@ -68,17 +68,33 @@ export default class Ingredients {
 			let ingTag = event.target.getAttribute("data-filter");
 			var myIndex = result.selectedIng.indexOf(ingTag);
 
+
 			// Teste si l'item n'est pas sélectionné (existe dans selectedIng?) et s'il existe (pb hors liste)
 			if (myIndex === -1 && ingTag !== null ) {   			   			
 				event.target.classList.add("result.selectedIng");
 				// Ajout de l'item dans selectedIng
 				result.selectedIng.push(ingTag);
+				// Position de la liste
+				let topListIng = document.getElementById("hiddenIngredientsFilter");
+				let topListApp = document.getElementById("hiddenAppareilFilter");
+				let topListUst = document.getElementById("hiddenUstensilesFilter");
+				if (result.selectedIng.length !==0 || result.selectedApp.length !==0 || result.selectedUst.length !==0){
+					topListIng.style.top = "20rem";
+					topListApp.style.top = "20rem";
+					topListUst.style.top = "20rem";
+					} else {
+					topListIng.style.top = "16.2rem";
+					topListApp.style.top = "16.2rem";
+					topListUst.style.top = "16.2rem";
+				}
 				// Fermeture affichage liste après sélection de l'item
 				Button.hideButtonsOnClick(
 					document.querySelector("#ingredients > button"),
 					document.querySelector("#openIngredientsFilter"),
 					document.querySelector("#hiddenIngredientsFilter")
 				);
+
+
 				// Pour affichage des tags sous la barre de recherche principale
 				let tagList = document.getElementById("tagIngList");
 				// Suppression des tags de la recherche précédente
@@ -169,7 +185,11 @@ export default class Ingredients {
 		// Effacement des anciennes recettes, affichage des recettes sélectionnées et de leur nbre 
 		Utils.clearRecipes();
 		Display.buildResult(result.recipesMatched);
-		Messages.buildResultMessageWithResult(result.recipesMatched);
+		if (!Utils.Valid(valueSearch) && result.selectedIng.length === 0 && result.selectedApp.length === 0 && result.selectedUst.length === 0) {
+			Messages.hideMessage();
+		} else {
+			Messages.buildResultMessageWithResult(result.recipesMatched);
+		}
 		// Maj des listes des filtres
 		Utils.clearFilters(this.ingredientsExample);
 		this.fillIngredients(Utils.sortByTitle(Data.getAllIngredients(result.recipesMatched)));
@@ -177,5 +197,18 @@ export default class Ingredients {
 		Appliances.fillAppliances(Utils.sortByTitle(Data.getAllAppliances(result.recipesMatched)));
 		Utils.clearFilters(Ustensils.ustensilsExample);
 		Ustensils.fillUstensils(Utils.sortByTitle(Data.getAllUstensils(result.recipesMatched)));
+		// Position de la liste
+		let topListIng = document.getElementById("hiddenIngredientsFilter");
+		let topListApp = document.getElementById("hiddenAppareilFilter");
+		let topListUst = document.getElementById("hiddenUstensilesFilter");
+		if (result.selectedIng.length !==0 || result.selectedApp.length !==0 || result.selectedUst.length !==0){
+			topListIng.style.top = "20rem";
+			topListApp.style.top = "20rem";
+			topListUst.style.top = "20rem";
+			} else {
+			topListIng.style.top = "16.2rem";
+			topListApp.style.top = "16.2rem";
+			topListUst.style.top = "16.2rem";
+		}
 	}
 }
