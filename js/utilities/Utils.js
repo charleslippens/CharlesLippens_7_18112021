@@ -1,20 +1,27 @@
 "use strict";
 
 export default class Utils {
-	// La recherche débute à 3 caractères ou plus
+	
+	// La recherche générale débute à partir de 3 caractères ou plus
+	//
 	static Valid(value) {
 		return value.length > 2;
 	}
 
 	// Efface les recettes
+	//
 	static clearRecipes() {
 		return (document.getElementById("mainContent").innerHTML = "");
 	}
 
+	// Efface la liste du filtre "elt"
+	//
 	static clearFilters(elt) {
 		return (elt.innerHTML = "");
 	}
 
+	// Normalisation et passage en minuscule de la chaine "text"
+	//
 	static normalizeText(text) {
 		return text
 			.toLowerCase()
@@ -22,7 +29,8 @@ export default class Utils {
 			.replace(/[\u0300-\u036f]/g, "");
 	}
 
-	// Transforme le texte en majuscule
+	// Normalisation et majuscule 1er caractère de la chaine "text"
+	//
 	static upperText(text) {
 		return (
 			text
@@ -38,7 +46,8 @@ export default class Utils {
 		);
 	}
 
-	// Tri alphabétique de array
+	// Tri alphabétique de "array" > "arraySort"
+	//
 	static sortByTitle(array) {
 		let arrayNoSort = [...new Set(array)];
 		let arraySort = arrayNoSort.sort((a, b) => {
@@ -48,7 +57,6 @@ export default class Utils {
 				return 1;
 			}
 		});
-
 		return arraySort;
 	}
 }

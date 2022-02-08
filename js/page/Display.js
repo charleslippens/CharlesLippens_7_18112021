@@ -2,42 +2,48 @@
 import Utils from "../utilities/Utils.js";
 
 export default class Display {
-	// construit la section contenant les recettes à afficher
+
+	// Retourne l'ensemble des recettes "collections" pour affichage
+	//
 	static buildResult(collections) {
 		return collections.forEach((collection) => {
 			this.buildRecipe(collection);
 		});
 	}
 
-	// construit chaque recette
+	// Retourne une recette pour affichage dans "Id=mainContent"
+	//
 	static buildRecipe(collection) {
 		let section = document.getElementById("mainContent");
 		return section.appendChild(this.createArticleElt(collection));
 	}
 
-	// construit l'article qui contiendra l'information de chaque recette
+	// Retourne l'article qui contiendra l'information de chaque recette
+	//
 	static createArticleElt(collection) {
 		let article = document.createElement("article");
 		let dataFilterIngredients = collection.ingredients.map((element) =>
 			Utils.normalizeText(element.ingredient)
 		);
 		let dataFilterAppliances = Utils.normalizeText(collection.appliance);
-		let dataFilterUstensils = collection.ustensils;
+		let dataFilterUstensils = collection.ustensils; // normalize?
 		let dataFilter =
 			collection.ingredients.map((element) => Utils.normalizeText(element.ingredient)) +
-			collection.ustensils +
+			collection.ustensils + // normalize ??
 			Utils.normalizeText(collection.appliance);
-
+		// Data associés à chaque recette pour html
 		article.classList.add("articleRecipes");
 		article.setAttribute("data-filter", dataFilter);
 		article.setAttribute("data-filter-ingredients", dataFilterIngredients);
 		article.setAttribute("data-filter-appliances", dataFilterAppliances);
 		article.setAttribute("data-filter-ustensils", dataFilterUstensils);
+		// html de la recette pour affichage
 		article.innerHTML = this.getArticleInnerHTML(collection);
-
 		return article;
 	}
 
+	// retourne le html d'une recette
+	//
 	static getArticleInnerHTML(collection) {
 		return `
 		<img src='./images/background_grey.png' alt='img' />

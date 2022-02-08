@@ -6,17 +6,30 @@
 Version de novembre 2021
 
 
+## Etapes:
+
+Proposition de développement de la structure (en cours):
+- CSS
+- Images
+- JS: 
+  - API: fichier de données
+  - Page: Display.js pour l'affichage des recettes
+  - main.js: Appel de l'api construit la section avec toutes les recettes
+- index.html
+
+mise en page + fiche d’investigation en cours
+
+
 ## Consignes:
 
 Analyser un problème informatique
 
 Développer un algorithme pour résoudre un problème
 
-## Fiche d'investigation de la fonctionnalité de recherche:
+## Fiche d'investigation de la fonctionnalité de recherche (en cours):
 
-https://github.com/charleslippens/CharlesLippens_7_18112021/blob/main/Fiche_investigation_performance_P7.pdf
+https://github.com/charleslippens/CharlesLippens_7_181121/blob/main/Fiche%2Bd%E2%80%99investigation%2Bfonctionnalite%CC%81_P7_en_cours.pdf
 
-JSBench: https://jsben.ch/ZD9id
 
 ## Notes:
 
@@ -26,7 +39,6 @@ Maquettes: https://www.figma.com/file/xqeE1ZKlHUWi2Efo8r73NK/UI-Design-Les-Petit
 
 Données Recettes : https://github.com/OpenClassrooms-Student-Center/P11-front-end-search-engine/blob/master/recipes.js
 
-## Vérifications:
+## Vérifications (en cours):
 
 W3C CSS et HTML
-ESLINT
